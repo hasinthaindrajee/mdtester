@@ -21,7 +21,7 @@ Instead you can redirect stderr stream to a log file using below command.
 
 	ballerina run test.bal 2> test.log
 
-**“2>”** suggests that **“stderror”** stream will be redirected to the given file. In contrast  If **“>”** is used instead of **“2>”**, logs will not be printed in test.log file since ballerina writes logs to stderr output stream.
+**“2>”** suggests that **“stderr”** stream will be redirected to the given file. In contrast  If **“>”** is used instead of **“2>”**, logs will not be printed in test.log file since ballerina writes logs to **stderr** output stream.
 
 
 ### Log Level
