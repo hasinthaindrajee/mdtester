@@ -22,30 +22,30 @@
 
   Instead you can redirect stderr stream to a log file using below command. 
 
-ballerina run test.bal 2> test.log
+	ballerina run test.bal 2> test.log
 
-“2>” suggests that “stderror” stream will be redirected to the given file. In contrast  If “>” is used instead of “2>”, logs will not be printed in test.log file since ballerina writes logs to stderr output stream.
+  “2>” suggests that “stderror” stream will be redirected to the given file. In contrast  If “>” is used instead of “2>”,       logs will not be printed in test.log file since ballerina writes logs to stderr output stream.
 
 
 ### Log Level
 
-The level of right descriptiveness of information required to be written to output method. This includes a set of standard levels of logs which are used commonly such as INFO, DEBUG etc. 
+  The level of right descriptiveness of information required to be written to output method. This includes a set of standard     levels of logs which are used commonly such as INFO, DEBUG etc. 
 
-Ballerina logging comes with all standard levels of logs. The supported set of log levels are INFO, DEBUG, TRACE, WARN, ERROR. By default the level of logging in Ballerina programs is “INFO”. In addition to these log levels, there are 2 additionals levels: OFF and ALL. OFF turns off logging and ALL allows all log levels. 
+  Ballerina logging comes with all standard levels of logs. The supported set of log levels are INFO, DEBUG, TRACE, WARN,       ERROR. By default the level of logging in Ballerina programs is “INFO”. In addition to these log levels, there are 2           additionals levels: OFF and ALL. OFF turns off logging and ALL allows all log levels. 
 
 ##### * Control log level from CLI
 
-Output log levels can be controlled over CLI arguments as well as configurations. To control output log level over CLI use the below command.
+  Output log levels can be controlled over CLI arguments as well as configurations. To control output log level over CLI use     the below command.
 
-ballerina run test.bal -e ballerina.log.level=<LOG_LEVEL>
+	ballerina run test.bal -e ballerina.log.level=<LOG_LEVEL>
 
-Ex - ballerina run test.bal -e ballerina.log.level=ERROR -e foo.log.level=ERROR
+	Ex - ballerina run test.bal -e ballerina.log.level=ERROR -e foo.log.level=ERROR
 
-ballerina.log.level=ERROR defines the overall logging level whereas foo.log.level=ERROR controls the logging level of package foo
+  ballerina.log.level=ERROR defines the overall logging level whereas foo.log.level=ERROR controls the logging level of         package foo
 
 ###### * Controlling log level from configuration file. 
 
-Create a file ballerina.conf at source root level if you do not have this config file already created. Add the following content and save it.
+  Create a file ballerina.conf at source root level if you do not have this config file already created. Add the following       content and save it.
 
 	[ballerina.log]
 	level="ERROR"
@@ -56,36 +56,38 @@ Create a file ballerina.conf at source root level if you do not have this config
 
 ### Sample : 
 
-In this sample term <project_home> will be referred to the root directory where the ballerina project resides.
+  In this sample term <project_home> will be referred to the root directory where the ballerina project resides.
 
-Create a directory with name foo.
-Add a file named test.bal and add the following content to the file.
+  Create a directory with name foo.
+  Add a file named test.bal and add the following content to the file.
 
 	package foo;
 	import ballerina/log;
 
 	function main(string[] args) {
 	
-    			error err = {message: "error occurred"};
-    			log:printDebug("debug log");
-    			log:printError("error log");
-    			log:printErrorCause("error log with cause", err);
-    			log:printInfo("info log");
-    			log:printTrace("trace log");
-    			log:printWarn("warn log");
-			
+    		error err = {message: "error occurred"};
+    		log:printDebug("debug log");
+    		log:printError("error log");
+    		log:printErrorCause("error log with cause", err);
+    		log:printInfo("info log");
+    		log:printTrace("trace log");
+    		log:printWarn("warn log");		
 	}
 
-Save it.
+  Save it.
 
-Stay in <project_home> directory and run the ballerina file.
-ballerina run foo/
+  Stay in <project_home> directory and run the ballerina file.
+  
+	ballerina run foo/
 
-To write logs to test.log file execute the below command.
-ballerina run foo/ 2> test.log
+  To write logs to test.log file execute the below command.
 
-To enable only debug logs, run the ballerina program with below arguments.
-ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR
+	ballerina run foo/ 2> test.log
+
+  To enable only debug logs, run the ballerina program with below arguments.
+  
+  	ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR
 
 		
 [1] https://ballerinalang.org/docs/by-example/log-api
