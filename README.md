@@ -11,7 +11,7 @@ Loggers are defined over packages. Ie there are dedicated loggers for each packa
 
 ### Log Outputs 
 
-Ballerina supports console logs by default which is container friendly. All logs are written to console standard  error (stderr) output stream. Depending on requirements logs can be redirected to a log file using output redirection. Furthermore, different logging levels can be defined for different packages. Refer Log Level section for more information about controling log output levels.
+Ballerina supports console logs by default which is container friendly. All logs are written to console standard  error (stderr) output stream. Depending on requirements logs can be redirected to a log file using output redirection. Furthermore, different logging output levels can be defined for different packages. Refer **Log Level** section for more information about controling log output levels.
 
 Ex - Suppose you have a logging sample as described in [Ballerina by Example: Log API](https://ballerinalang.org/docs/by-example/log-api). If the given sample is run with below command the logs will be printed in the console . (test.bal contains   the Ballerina code for logging).
 
