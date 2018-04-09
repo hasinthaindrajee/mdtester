@@ -1,18 +1,18 @@
-log package
+# log package
 
 The log package of Ballerina provides a comprehensive and user friendly API for logging which helps to support maintaining, tracing diagnosing and servicing software for service engineers, system administrators and developers. 
 
 
 Below are the key terms and functionalities exposed from this package.
 
-Loggers 
+### Loggers 
 
 Loggers are defined over packages. Ie there are dedicated loggers for each package and package will be printed with logs so that it’s self contained with rest of the information.  In the below sample [foo] is the package where the ballerina logging logic (test.bal) resides.
 
 Ex - 2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.
 
 
-Log Outputs 
+### Log Outputs 
 
 Ballerina supports console logs by default which is container friendly. All logs are written to console standard  error (stderr) output stream. Depending on requirements logs can be redirected to a log file using output redirection. Furthermore, different logging levels can be defined for different packages. Refer Log Level section for more information about controling log output levels.
 
@@ -27,13 +27,13 @@ ballerina run test.bal 2> test.log
 “2>” suggests that “stderror” stream will be redirected to the given file. In contrast  If “>” is used instead of “2>”, logs will not be printed in test.log file since ballerina writes logs to stderr output stream.
 
 
-Log Level
+### Log Level
 
 The level of right descriptiveness of information required to be written to output method. This includes a set of standard levels of logs which are used commonly such as INFO, DEBUG etc. 
 
 Ballerina logging comes with all standard levels of logs. The supported set of log levels are INFO, DEBUG, TRACE, WARN, ERROR. By default the level of logging in Ballerina programs is “INFO”. In addition to these log levels, there are 2 additionals levels: OFF and ALL. OFF turns off logging and ALL allows all log levels. 
 
-Control log level from CLI
+##### Control log level from CLI
 
 Output log levels can be controlled over CLI arguments as well as configurations. To control output log level over CLI use the below command.
 
@@ -43,7 +43,7 @@ Ex - ballerina run test.bal -e ballerina.log.level=ERROR -e foo.log.level=ERROR
 
 ballerina.log.level=ERROR defines the overall logging level whereas foo.log.level=ERROR controls the logging level of package foo
 
-Controlling log level from configuration file. 
+###### Controlling log level from configuration file. 
 
 Create a file ballerina.conf at source root level if you do not have this config file already created. Add the following content and save it.
 
@@ -54,7 +54,7 @@ level="ERROR"
 level="ERROR"
 
 
-Sample : 
+### Sample : 
 
 In this sample term <project_home> will be referred to the root directory where the ballerina project resides.
 
