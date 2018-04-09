@@ -65,14 +65,13 @@
 	import ballerina/log;
 
 	function main(string[] args) {
-	
-    		error err = {message: "error occurred"};
-    		log:printDebug("debug log");
-    		log:printError("error log");
-    		log:printErrorCause("error log with cause", err);
-    		log:printInfo("info log");
-    		log:printTrace("trace log");
-    		log:printWarn("warn log");		
+    	  error err = {message: "error occurred"};
+    	  log:printDebug("debug log");
+    	  log:printError("error log");
+    	  log:printErrorCause("error log with cause", err);
+    	  log:printInfo("info log");
+    	  log:printTrace("trace log");
+    	  log:printWarn("warn log");		
 	}
 
   Save it.
