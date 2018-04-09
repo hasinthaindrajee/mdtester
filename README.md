@@ -7,7 +7,7 @@
 
 ### Loggers 
 
-  Loggers are defined over packages. Ie there are dedicated loggers for each package and package will be printed with logs so   that it’s self contained with rest of the information.  In the below sample **[foo]** is the package where the ballerina logging   logic (test.bal) resides.
+  Loggers are defined over packages. Ie there are dedicated loggers for each package and package will be printed with logs so   that it’s self contained with rest of the information.  In the below sample **[foo]** is the package where the ballerina       logging logic (test.bal) resides.
 
     Ex - 2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.
 
@@ -16,7 +16,7 @@
 
   Ballerina supports console logs by default which is container friendly. All logs are written to console standard  error       (stderr) output stream. Depending on requirements logs can be redirected to a log file using output redirection.               Furthermore, different logging levels can be defined for different packages. Refer Log Level section for more information     about controling log output levels.
 
-  Ex - Suppose you have a logging sample as described in [1](https://ballerinalang.org/docs/by-example/log-api). If the given 	sample is run with below command the logs will be     printed in the console . (test.bal contains the Ballerina code for       logging).
+  Ex - Suppose you have a logging sample as described in [Ballerina by Example: Log API] (https://ballerinalang.org/docs/by-     example/log-api). If the given sample is run with below command the logs will be printed in the console . (test.bal contains   the Ballerina code for logging).
 
 	ballerina run test.bal
 
