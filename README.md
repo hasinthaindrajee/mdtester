@@ -1,4 +1,4 @@
-The log package of Ballerina provides a comprehensive and user friendly API for logging which helps to support maintaining,  tracing, diagnosing and servicing software for service engineers, system administrators and developers. 
+The log package of Ballerina provides a comprehensive API for logging which helps to support maintaining,  tracing, diagnosing and servicing software for service engineers, system administrators and developers. 
 
 Below are the key terms and functionalities exposed from this package.
 
