@@ -34,7 +34,7 @@ Example definition :
 Number of `retries` allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with `transaction` block will execute the logic inside on `retry` block on each failure up to four failures.
 
 ### onretry
-Onretry block is executed on failures within the `transaction`. This block will be executed multiple times which can be defined with `retries` value.
+Onretry block is executed on failures within a `transaction`. This block will be executed multiple times which can be defined with `retries` value.
 
 ### oncommit 
 Oncommit is a function pointer where it points to an existing function with a string argument. The string argument will be the ID of the `transaction`.  This function will be executed upon successful execution of `transaction` without any failures.
