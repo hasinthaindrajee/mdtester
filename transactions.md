@@ -31,7 +31,7 @@ Example definition :
 ```
 
 ### retries
-Number of `retries` allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with `transaction` block will execute the logic inside on `retry` block on each failure upto four failures.
+Number of `retries` allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with `transaction` block will execute the logic inside on `retry` block on each failure up to four failures.
 
 ### onretry
 Onretry block is executed on failures within the `transaction`. This block will be executed multiple times which can be defined with `retries` value.
