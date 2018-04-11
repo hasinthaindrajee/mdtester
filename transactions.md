@@ -60,7 +60,6 @@ This is a keyword which is used to fail a transaction explicitly. This fails the
 
 ### abort
 Abort the transaction without retrying even if retrying count and action is specified. Upon abort the function which is pointed from Onabort will be executed.
-Sample 
 
 ## Sample
 
