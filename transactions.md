@@ -1,17 +1,15 @@
-Transaction package. 
-
 Transaction is a sequence of operations performed as a single logical unit of work. In simple terms operations in a transaction either must be completed successfully or fully fail as there are no intermediate states. 
 
 A transaction should exhibit ACID properties. Ie 
 
-Atomicity - Either all operations of a transactions should be completed successfully or all operations should fail. There shouldn’t be any intermediate states.
-Consistency - A transaction should never leave data in an inconsistent state. Any data structure including the data in database should transform from one valid state to another valid state following a transaction.
-Integrity - Makes sure that no unexpected consequences are present as a result of concurrent executions.
-Durability - A transactions effects are permanently stored in the system. The modifications persist even in the event of a system failure.
+1. Atomicity - Either all operations of a transactions should be completed successfully or all operations should fail. There shouldn’t be any intermediate states.
+2. Consistency - A transaction should never leave data in an inconsistent state. Any data structure including the data in database should transform from one valid state to another valid state following a transaction.
+3. Integrity - Makes sure that no unexpected consequences are present as a result of concurrent executions.
+4. Durability - A transactions effects are permanently stored in the system. The modifications persist even in the event of a system failure.
 
-Terminology
+## Terminology
 
-Transacted functions
+### Transacted functions
 
 In simple terms transacted functions are the functions which can be subjected for transactions. A failure within a transaction will cause to rollback the operations done using transacted functions. 
 
@@ -19,17 +17,19 @@ Ex - Database operations. JMS operations.
 Database insert/update operations in ballerina are transacted functions.
 
 
-Define a transaction 
+### Define a transaction 
 
 A definition of a transaction has few main elements and keywords.
 
 Example definition :
 
-transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
+'''
+   transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
 
- } onretry {
-        
-}
+    } onretry {
+
+   }
+'''
 
 
 Retries
