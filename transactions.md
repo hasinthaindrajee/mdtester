@@ -49,11 +49,11 @@ Eg-
 
 ### onabort
 Onabort also is a function pointer which points towards a developper developed function with a string argument which is the transaction ID. This function will be executed upon aborting the transaction. 
-
-function onFailure(string id) {
-   io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
-}
-
+```
+    function onFailure(string id) {
+       io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
+    }
+```
 
 ### fail
 This is a keyword which is used to fail a transaction explicitly. This fails the transaction and skip rest of the logic in the transaction but will try to retry. Will be elaborated more in later sections.
