@@ -2,10 +2,10 @@ Transaction is a sequence of operations performed as a single logical unit of wo
 
 A transaction should exhibit ACID properties. Ie 
 
-1. Atomicity - Either all operations of a transactions should be completed successfully or all operations should not should not be performed. There shouldn’t be any intermediate states.
-2. Consistency - A transaction should never leave data in an inconsistent state. Any data structure including the data in database should transform from one valid state to another valid state following a transaction.
-3. Integrity - Makes sure that no unexpected consequences are present as a result of concurrent executions.
-4. Durability - A transactions effects are permanently stored in the system. The modifications persist even in the event of a system failure.
+1. **Atomicity** - Either all operations of a transactions should be completed successfully or all operations should not should not be performed. There shouldn’t be any intermediate states.
+2. **Consistency** - A transaction should never leave data in an inconsistent state. Any data structure including the data in database should transform from one valid state to another valid state following a transaction.
+3. **Integrity** - Makes sure that no unexpected consequences are present as a result of concurrent executions.
+4. **Durability** - A transactions effects are permanently stored in the system. The modifications persist even in the event of a system failure.
 
 ## Terminology
 
@@ -13,7 +13,7 @@ A transaction should exhibit ACID properties. Ie
 
 In simple terms transacted functions are the functions which can be subjected for transactions. A failure within a transaction will cause to rollback the operations done using transacted functions. 
 
-Ex - Database operations. JMS operations.
+Eg - Database operations. JMS operations.
 Database insert/update operations in ballerina are transacted functions.
 
 
@@ -35,7 +35,7 @@ Number of retries allowed when a transaction failure takes place. In the given e
 Oncommit
 
 ### onretry
-Onretry block is executed on failures within the transaction. This block will be executed multiple times which can be defined with “retries” value.
+Onretry block is executed on failures within the transaction. This block will be executed multiple times which can be defined with **retries** value.
 
 ### oncommit 
 Oncommit is a function pointer where it points to an existing function with a string argument. The string argument will be the ID of the transaction.  This function will be executed upon successful execution of transaction without any failures.
@@ -101,7 +101,7 @@ This ballerina sample comprises of database transactions. This sample use MySQL 
       io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
    }
 ```
-Save the content in .bal file. Make sure to change connection properties as per your connection and run the ballerina sample.
+Save the content in .bal file. Make sure to change connection properties as per your database connection and run the ballerina sample.
 
 This sample,
 
@@ -143,6 +143,6 @@ Eg
    }
 ```
 
-In this sample transacted function update fails since it executes an sql statement on non-existing table. Since an error is returned from update, “fail” is used to explicitly avoid executing the next insert query which is has correct sql statement. Upon failing onretry will be executed.
+In this sample transacted function update fails since it executes an sql statement on non-existing table. Since an error is returned from update, **fail** is used to explicitly avoid executing the next insert query which is has correct sql statement. Upon failing onretry will be executed.
 
-Likewise “abort” can also be called to abort the execution of the rest of the logic inside transaction. Difference between abort and fail is, upon abort there will be no retries. 
+Likewise **abort** can also be called to abort the execution of the rest of the logic inside transaction. Difference between abort and fail is, upon abort there will be no retries. 
