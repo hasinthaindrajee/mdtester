@@ -22,33 +22,32 @@ Database insert/update operations in ballerina are transacted functions.
 A definition of a transaction has few main elements and keywords.
 
 Example definition :
-
-'''
-   transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
+```
+    transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
 
     } onretry {
 
-   }
-'''
+    }
+```
 
-
-Retries
+### Retries
 Number of retries allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with transaction block will execute the logic inside on retry block on each failure upto four failures.
 Oncommit
 
-Onretry
+### onretry
 Onretry block is executed on failures within the transaction. This block will be executed multiple times which can be defined with “retries” value.
 
-Oncommit 
+### oncommit 
 Oncommit is a function pointer where it points to an existing function with a string argument. The string argument will be the ID of the transaction.  This function will be executed upon successful execution of transaction without any failures.
 
 Eg- 
+```
+   function onSuccess(string id) {
+      io:println("Transaction completed successfully. Transaction id: " + id);
+   }
+```
 
-function onSuccess(string id) {
-   io:println("Transaction completed successfully. Transaction id: " + id);
-}
-
-Onabort
+### onabort
 Onabort also is a function pointer which points towards a developper developed function with a string argument which is the transaction ID. This function will be executed upon aborting the transaction. 
 
 function onFailure(string id) {
@@ -56,60 +55,63 @@ function onFailure(string id) {
 }
 
 
-Fail
+### fail
 This is a keyword which is used to fail a transaction explicitly. This fails the transaction and skip rest of the logic in the transaction but will try to retry. Will be elaborated more in later sections.
 
-Abort
+### abort
 Abort the transaction without retrying even if retrying count and action is specified. Upon abort the function which is pointed from Onabort will be executed.
 Sample 
 
+## Sample
+
 This ballerina sample comprises of database transactions. This sample use MySQL DB and before running the sample copy the MySQL JDBC driver to the BALLERINA_HOME/bre/lib folder.
 
-import ballerina/sql;
-import ballerina/io;
+```
+   import ballerina/sql;
+   import ballerina/io;
 
-endpoint sql:Client testDB {
-   database:sql:DB_MYSQL,
-   host:"localhost",
-   port:3306,
-   name:"testDB",
-   username:"root",
-   password:"root",
-   options:{maximumPoolSize:1}
-};
+   endpoint sql:Client testDB {
+      database:sql:DB_MYSQL,
+      host:"localhost",
+      port:3306,
+      name:"testDB",
+      username:"root",
+      password:"root",
+      options:{maximumPoolSize:1}
+   };
 
-function main(string[] args) {
+   function main(string[] args) {
 
-   var updatedRows = testDB -> update("CREATE TABLE IF NOT EXISTS CUSTOMER (ID INT, NAME VARCHAR(30))", null);
-   updatedRows = testDB -> update("CREATE TABLE IF NOT EXISTS SALARY (ID INT, MON_SALARY FLOAT)", null);
+      var updatedRows = testDB -> update("CREATE TABLE IF NOT EXISTS CUSTOMER (ID INT, NAME VARCHAR(30))", null);
+      updatedRows = testDB -> update("CREATE TABLE IF NOT EXISTS SALARY (ID INT, MON_SALARY FLOAT)", null);
 
-   transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
-       var c = testDB -> update("INSERT INTO CUSTOMER(ID,NAME) VALUES (1, 'Anne')", null);
-       c = testDB -> update("INSERT INTO SALARY (ID, MON_SALARY) VALUES (1, 2500)", null);
-   } onretry {
-       io:println("Not retrying eventhough 4 retrying attempts are specified.");
+      transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
+          var c = testDB -> update("INSERT INTO CUSTOMER(ID,NAME) VALUES (1, 'Anne')", null);
+          c = testDB -> update("INSERT INTO SALARY (ID, MON_SALARY) VALUES (1, 2500)", null);
+      } onretry {
+          io:println("Not retrying eventhough 4 retrying attempts are specified.");
+      }
+      _ = testDB -> close();
    }
-   _ = testDB -> close();
-}
 
-function onSuccess(string id) {
-   io:println("Transaction completed successfully. Transaction id: " + id);
-}
+   function onSuccess(string id) {
+      io:println("Transaction completed successfully. Transaction id: " + id);
+   }
 
-function onFailure(string id) {
-   io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
-}
-
+   function onFailure(string id) {
+      io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
+   }
+```
 Save the content in .bal file. Make sure to change connection properties as per your connection and run the ballerina sample.
 
-This sample
+This sample,
 
-Creates two tables if not exists.
-Enters two records to two tables in as a transaction.
+* Creates two tables if not exists.
+* Enters two records to two tables in as a transaction.
 
-Manipulate database queries inside transaction block and it will cause failures of database updates. A single execution failure in this block will fail all operations which are done within the block.
+Manipulate database queries inside transaction block and it will cause failures of database updates. A single execution failure in this block will fail all operations which are done within the block which is a characteristic of a transaction.
 
-What are transaction failures ?
+### What are transaction failures ?
 
 Any unhandled exception which occurs inside a transaction block will be considered as a transaction failure. Calling “fail” explicitly will cause a transaction failure as well. 
 
@@ -119,29 +121,28 @@ The second type of failures (ie failures which are returned from transacted func
 
 Onretry will be executed a given number of times upon these transaction failures. 
 
-Fail and abort explicitly within transactions
+### Fail and abort explicitly within transactions
 
 As described in the introduction, transactions can be failed or aborted explicitly without continuing the rest of the logic in the transaction block. To fail a transaction “fail” keyword is used where as “abort” is used to abort transactions.
 
 Eg 
+```
+    transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
+          var c = testDB -> update("INSERT INTO CUSTOMER_UNAVAILABLE(ID,NAME) VALUES (1, 'Anne')", null);
 
- transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
-       var c = testDB -> update("INSERT INTO CUSTOMER_UNAVAILABLE(ID,NAME) VALUES (1, 'Anne')", null);
-
-match c {
-   int y => {
-       insertedCount = y;
+         match c {
+            int y => {
+                insertedCount = y;
+            }
+            sql:SQLConnectorError err1 => {
+                fail;
+            }
    }
-   sql:SQLConnectorError err1 => {
-       fail;
-   }
-}
-
        c = testDB -> update("INSERT INTO SALARY (ID, MON_SALARY) VALUES (1, 2500)", null);
    } onretry {
        io:println("Not retrying eventhough 4 retrying attempts are specified.");
    }
-
+```
 
 In this sample transacted function update fails since it executes an sql statement on non-existing table. Since an error is returned from update, “fail” is used to explicitly avoid executing the next insert query which is has correct sql statement. Upon failing onretry will be executed.
 
