@@ -14,7 +14,7 @@ A transaction should exhibit ACID properties. Ie
 In simple terms transacted functions are the functions which can be subjected for transactions. A failure within a transaction will cause to rollback the operations done using transacted functions. 
 
 Eg - Database operations. JMS operations.
-Database insert/update operations in ballerina are transacted functions.
+Database insert/update operations in ballerina are `transacted functions`.
 
 
 ### Define a transaction 
