@@ -1,7 +1,5 @@
 Transaction is a sequence of operations performed as a single logical unit of work. In simple terms operations in a transaction either must be completed successfully or fully fail as there are no intermediate states. Ballerina `ballerina/transactions` provides facilities to control transactions.
 
-## Terminology
-
 ### Transacted functions
 
 In simple terms transacted functions are the functions which can be subjected for transactions. A failure within a transaction will cause to rollback the operations done using transacted functions. 
