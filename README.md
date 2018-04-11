@@ -17,11 +17,11 @@ All logs are written to **stderr** by default which is more container friendly t
 
 Ex - Suppose you have a logging sample as described in [Ballerina by Example: Log API](https://ballerinalang.org/docs/by-example/log-api). If the given sample is run with below command the logs will be printed in the console . (test.bal contains   the Ballerina code for logging).
 
-	```ballerina run test.bal```
+```ballerina run test.bal```
 
 Instead you can redirect stderr stream to a log file using below command. 
 
-	```ballerina run test.bal 2> test.log```
+```ballerina run test.bal 2> test.log```
 
 
 ### Log Level
