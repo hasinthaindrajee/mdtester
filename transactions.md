@@ -31,14 +31,13 @@ Example definition :
 ```
 
 ### retries
-Number of retries allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with transaction block will execute the logic inside on retry block on each failure upto four failures.
-Oncommit
+Number of `retries` allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with `transaction` block will execute the logic inside on `retry` block on each failure upto four failures.
 
 ### onretry
-Onretry block is executed on failures within the transaction. This block will be executed multiple times which can be defined with **retries** value.
+Onretry block is executed on failures within the `transaction`. This block will be executed multiple times which can be defined with `retries` value.
 
 ### oncommit 
-Oncommit is a function pointer where it points to an existing function with a string argument. The string argument will be the ID of the transaction.  This function will be executed upon successful execution of transaction without any failures.
+Oncommit is a function pointer where it points to an existing function with a string argument. The string argument will be the ID of the `transaction`.  This function will be executed upon successful execution of `transaction` without any failures.
 
 Eg- 
 ```
@@ -48,7 +47,7 @@ Eg-
 ```
 
 ### onabort
-Onabort also is a function pointer which points towards a developper developed function with a string argument which is the transaction ID. This function will be executed upon aborting the transaction. 
+Onabort also is a function pointer which points towards a function with a string argument which is the `transaction ID`. This function will be executed upon aborting the `transaction`. 
 ```
     function onFailure(string id) {
        io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
@@ -56,14 +55,14 @@ Onabort also is a function pointer which points towards a developper developed f
 ```
 
 ### fail
-This is a keyword which is used to fail a transaction explicitly. This fails the transaction and skip rest of the logic in the transaction but will try to retry. Will be elaborated more in later sections.
+This is a keyword which is used to fail a transaction explicitly. This fails the transaction and skip rest of the logic in the transaction but will try to `retry`. Will be elaborated more in later sections.
 
 ### abort
-Abort the transaction without retrying even if retrying count and action is specified. Upon abort the function which is pointed from Onabort will be executed.
+Abort the transaction without retrying even if retrying count and action is specified. Upon abort the function which is pointed from `onabort` will be executed.
 
 ## Sample
 
-This ballerina sample comprises of database transactions. This sample use MySQL DB and before running the sample copy the MySQL JDBC driver to the BALLERINA_HOME/bre/lib folder.
+This ballerina sample comprises of database transactions. This sample use MySQL DB and before running the sample copy the MySQL JDBC driver to the `BALLERINA_HOME/bre/lib` folder.
 
 ```
    import ballerina/sql;
@@ -108,21 +107,21 @@ This sample,
 * Creates two tables if not exists.
 * Enters two records to two tables in as a transaction.
 
-Manipulate database queries inside transaction block and it will cause failures of database updates. A single execution failure in this block will fail all operations which are done within the block which is a characteristic of a transaction.
+Manipulate database queries inside transaction block and it will cause failures of database updates. A single execution failure in this `transactions` block will fail all operations which are done within the block.
 
-### What are transaction failures ?
+### Transaction Failures
 
-Any unhandled exception which occurs inside a transaction block will be considered as a transaction failure. Calling “fail” explicitly will cause a transaction failure as well. 
+Any unhandled `exception` which occurs inside a transaction block will be considered as a transaction failure. Calling `fail` explicitly will cause a transaction failure as well. 
 
-Apart from them, errors which are returned from transacted functions are also considered as transaction failures. 
+Apart from them, errors which are returned from `transacted functions` are also considered as transaction failures. 
 
-The second type of failures (ie failures which are returned from transacted functions) behave in a special way. Even though an error is returned from a transacted function, it will not halt, fail or abort the transaction immediately. Instead it will continue the reset of the logic within the transaction and will fail the transaction if any of the transacted functions have returned an error at the end and will rollback operations which took place in transacted functions. 
+The second type of failures (ie failures which are returned from `transacted functions`) behave in a special way. Even though an `error` is returned from a `transacted function`, it will not halt, fail or abort the transaction immediately. Instead it will continue the reset of the logic within the transaction and will fail the transaction if any of the `transacted functions` have returned an error at the end and will rollback operations which took place in `transacted functions`. 
 
-Onretry will be executed a given number of times upon these transaction failures. 
+`onretry` will be executed a given number of times upon these transaction failures. 
 
 ### Fail and abort explicitly within transactions
 
-As described in the introduction, transactions can be failed or aborted explicitly without continuing the rest of the logic in the transaction block. To fail a transaction “fail” keyword is used where as “abort” is used to abort transactions.
+As described in the introduction, `transactions` can be failed or aborted explicitly without continuing the rest of the logic in the transaction block. To fail a transaction `fail` keyword is used where as `abort` is used to abort transactions.
 
 Eg 
 ```
@@ -143,6 +142,6 @@ Eg
    }
 ```
 
-In this sample transacted function update fails since it executes an sql statement on non-existing table. Since an error is returned from update, **fail** is used to explicitly avoid executing the next insert query which is has correct sql statement. Upon failing onretry will be executed.
+In this sample transacted function update fails since it executes an sql statement on non-existing table. Since an error is returned from update, `fail` is used to explicitly avoid executing the next insert query which is has correct sql statement. Upon failing onretry will be executed.
 
-Likewise **abort** can also be called to abort the execution of the rest of the logic inside transaction. Difference between abort and fail is, upon abort there will be no retries. 
+Likewise `abort` can also be called to abort the execution of the rest of the logic inside transaction. Difference between abort and fail is, upon abort there will be no retries. 
