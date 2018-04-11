@@ -1,11 +1,4 @@
-Transaction is a sequence of operations performed as a single logical unit of work. In simple terms operations in a transaction either must be completed successfully or fully fail as there are no intermediate states. 
-
-A transaction should exhibit ACID properties. Ie 
-
-1. **Atomicity** - Either all operations of a transactions should be completed successfully or all operations should not should not be performed. There shouldn’t be any intermediate states.
-2. **Consistency** - A transaction should never leave data in an inconsistent state. Any data structure including the data in database should transform from one valid state to another valid state following a transaction.
-3. **Integrity** - Makes sure that no unexpected consequences are present as a result of concurrent executions.
-4. **Durability** - A transactions effects are permanently stored in the system. The modifications persist even in the event of a system failure.
+Transaction is a sequence of operations performed as a single logical unit of work. In simple terms operations in a transaction either must be completed successfully or fully fail as there are no intermediate states. Ballerina `ballerina/transactions` provides facilities to control transactions.
 
 ## Terminology
 
