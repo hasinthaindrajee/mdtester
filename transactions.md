@@ -30,7 +30,7 @@ Example definition :
     }
 ```
 
-### Retries
+### retries
 Number of retries allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with transaction block will execute the logic inside on retry block on each failure upto four failures.
 Oncommit
 
