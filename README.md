@@ -32,9 +32,9 @@ Instead you can redirect stderr stream to a log file using below command.
 
 Output log levels can be controlled over CLI arguments as well as through configurations. To control output log level over CLI use the below command.
 
-	```ballerina run test.bal -e ballerina.log.level=<LOG_LEVEL>```
+```ballerina run test.bal -e ballerina.log.level=<LOG_LEVEL>```
 
-	Ex - ballerina run test.bal -e ballerina.log.level=ERROR -e foo.log.level=ERROR
+Ex - ```ballerina run test.bal -e ballerina.log.level=ERROR -e foo.log.level=ERROR```
 
 ballerina.log.level=ERROR defines the overall logging level whereas foo.log.level=ERROR controls the logging level of package foo
 
@@ -72,13 +72,13 @@ Add a file named test.bal and add the following content to the file.
   Save it.
 
 Stay in <project_home> directory and run the ballerina file.
-  ``` ballerina run foo/ ```
+  ```ballerina run foo/ ```
 
 To write logs to test.log file execute the below command.
 ```ballerina run foo/ 2> test.log```
 
 To enable only debug logs, run the ballerina program with below arguments.
-``` ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR ```
+```ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR ```
 
 		
 [1] https://ballerinalang.org/docs/by-example/log-api
