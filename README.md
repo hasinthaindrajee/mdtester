@@ -16,11 +16,11 @@ All logs are written to **stderr** by default which is more container environmen
 
 Ex - Suppose you have a logging sample as described in [Ballerina by Example: Log API](https://ballerinalang.org/docs/by-example/log-api). If the given sample is run with below command the logs will be printed in the console . (test.bal contains   the Ballerina code for logging).
 
-	```ballerina run test.bal```
+```ballerina run test.bal```
 
 Instead you can redirect stderr stream to a log file using below command. 
 
-	```ballerina run test.bal 2> test.log```
+```ballerina run test.bal 2> test.log```
 
 
 ### Log Level
@@ -75,9 +75,11 @@ Stay in <project_home> directory and run the ballerina file.
   ```ballerina run foo/ ```
 
 To write logs to test.log file execute the below command.
+
 ```ballerina run foo/ 2> test.log```
 
 To enable only debug logs, run the ballerina program with below arguments.
+
 ```ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR ```
 
 		
