@@ -7,7 +7,7 @@ Below are the key terms and functionalities exposed from this package.
 
 Loggers are defined over packages. Ie there are dedicated loggers for each package and package will be printed with logs so that it is self contained with rest of the information.  In the below sample **[foo]** is the package where the ballerina logging logic (test.bal) resides.
 
-    Ex - ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
+Ex - ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
 
 
 ### Log Outputs 
