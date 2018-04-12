@@ -6,7 +6,7 @@ For more information refer to [Math API Documentation](https://ballerina.io/lear
 
 Sample
 
-```
+```ballerina
 import ballerina/io;
 import ballerina/math;
 function main(string[] args) {
