@@ -72,16 +72,13 @@ Add a file named test.bal and add the following content to the file.
   Save it.
 
 Stay in <project_home> directory and run the ballerina file.
-  
-	``` ballerina run foo/ ```
+  ``` ballerina run foo/ ```
 
 To write logs to test.log file execute the below command.
-
-	```ballerina run foo/ 2> test.log```
+```ballerina run foo/ 2> test.log```
 
 To enable only debug logs, run the ballerina program with below arguments.
-  
-  	``` ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR ```
+``` ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR ```
 
 		
 [1] https://ballerinalang.org/docs/by-example/log-api
