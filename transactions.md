@@ -5,7 +5,7 @@ Transaction is a sequence of operations performed as a single logical unit of wo
 In simple terms transacted functions are the functions which can be subjected for transactions. A failure within a transaction will cause to rollback the operations done using transacted functions. 
 
 Eg - Database operations. JMS operations.
-Database insert/update operations in ballerina are `transacted functions`.
+Database insert/update operations in ballerina are transacted functions.
 
 
 ### Define a transaction 
@@ -13,7 +13,7 @@ Database insert/update operations in ballerina are `transacted functions`.
 A definition of a transaction has few main elements and keywords.
 
 Example definition :
-```
+```ballerina
     transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
 
     } onretry {
@@ -22,7 +22,7 @@ Example definition :
 ```
 
 ### retries
-Number of `retries` allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution with `transaction` block will execute the logic inside on `retry` block on each failure up to four failures.
+Number of `retries` allowed when a transaction failure takes place. In the given example retry count is specified as 4 where a failure of an execution within `transaction` block will execute the logic inside `onretry` block for each failure up to four times.
 
 ### onretry
 Onretry block is executed on failures within a `transaction`. This block will be executed multiple times which can be defined with `retries` value.
@@ -31,7 +31,7 @@ Onretry block is executed on failures within a `transaction`. This block will be
 Oncommit is a function pointer where it points to an existing function with a string argument. The string argument will be the ID of the `transaction`.  This function will be executed upon successful execution of `transaction` without any failures.
 
 Eg- 
-```
+```ballerina
    function onSuccess(string id) {
       io:println("Transaction completed successfully. Transaction id: " + id);
    }
@@ -39,7 +39,7 @@ Eg-
 
 ### onabort
 Onabort also is a function pointer which points towards a function with a string argument which is the `transaction ID`. This function will be executed upon aborting the `transaction`. 
-```
+```ballerina
     function onFailure(string id) {
        io:println("Transaction aborted after retrying 4 times. Transaction id: " + id);
     }
@@ -55,7 +55,7 @@ Abort the transaction without retrying even if retrying count and action is spec
 
 This ballerina sample comprises of database transactions. This sample use MySQL DB and before running the sample copy the MySQL JDBC driver to the `BALLERINA_HOME/bre/lib` folder.
 
-```
+```ballerina
    import ballerina/sql;
    import ballerina/io;
 
@@ -115,7 +115,7 @@ The second type of failures (ie failures which are returned from `transacted fun
 As described in the introduction, `transactions` can be failed or aborted explicitly without continuing the rest of the logic in the transaction block. To fail a transaction `fail` keyword is used where as `abort` is used to abort transactions.
 
 Eg 
-```
+```ballerina
     transaction with retries = 4, oncommit = onSuccess, onabort = onFailure {
           var c = testDB -> update("INSERT INTO CUSTOMER_UNAVAILABLE(ID,NAME) VALUES (1, 'Anne')", null);
 
