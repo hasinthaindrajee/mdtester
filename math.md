@@ -20,7 +20,6 @@ function main(string[] args) {
    int absoluteIntValue = math:absInt(-152);
    io:println("Absolute value of -152      : " + absoluteIntValue);
 
-
    float acosValue = math:acos(0.027415567780803774);
    io:println("Arc cosine of 0.027415567780803774  : " + acosValue);
 
