@@ -1,6 +1,4 @@
-Math Package.
-
-This provides functionalities for performing fixed-precision integer arithmetic and fixed-precision decimal arithmetic. 
+Provides functionalities for performing fixed-precision integer arithmetic and fixed-precision decimal arithmetic. 
 
 For more information refer to [Math API Documentation](https://ballerina.io/learn/api-docs/math.html)
 
@@ -45,4 +43,4 @@ Arc cosine of 0.027415567780803774  : 1.5433773235341761
 Arc sine of 0.027415567780803774    : 0.02741900326072046
 Arc tangent of 0.027415567780803774 : 0.0274087022410345
 Cube root of 0.027415567780803774   : -3.0
-```’
+```
