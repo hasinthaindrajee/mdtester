@@ -5,21 +5,21 @@ This package comprises of time tasks timers and task appointments.
 
 ### Tasks timers
 
-Timers are used to execute periodical tasks. The timer starts ticking upon task registration. A timer may have an initial delay and an interval specified. The tasks will be triggered periodically following the given interval. The delay specifies the time between registering the task and its first execution. Thereafter, the timer will go off at regular intervals which causes the trigger function to be triggered. If a failure occurs during the execution of the trigger function, it will return an error. That error will be passed to the ```ballerina onErrorFunction ```.
+Timers are used to execute periodical tasks. The timer starts ticking upon task registration. A timer may have an initial delay and an interval specified. The tasks will be triggered periodically following the given interval. The delay specifies the time between registering the task and its first execution. Thereafter, the timer will go off at regular intervals which causes the trigger function to be triggered. If a failure occurs during the execution of the trigger function, it will return an error. That error will be passed to the ```onErrorFunction ```.
 
-```ballerina onTriggerFunction ```
+```onTriggerFunction ```
 
 The function which will be called upon timer goes off. 
 
-```ballerina onErrorFunction ```
+```onErrorFunction ```
  
 This function will be called if an error occurred while executing onTriggerFunction. 
 
-```ballerina interval ```
+```interval ```
 
 The time interval which the clock should go down. Once the peoriod of time denoted by ```intevel``` passes, the timer goes off and ```ballerina onTriggerFunction ``` is executed. The value should be specified in milliseconds.
 
-```ballerina delay```
+```delay```
 
 The delay which needs to be added executing the task upon for the very first time. This is specified in milliseconds.
 
