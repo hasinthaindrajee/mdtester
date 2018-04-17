@@ -40,11 +40,11 @@ Function doTask will do the timer task whereas function onError is the function 
 An arrangement of a task to be taken place on clock time. If we take a real world appointment as an  analogy for an appointment task, an appointment takes place on a given time, in a given pattern. (may be periodically). Cron syntax is used to define the time, and in
 case of recurring appointments, the frequency of the appointment.
 
-#### onTriggerFunction
+``` onTriggerFunction
 
  A trigger function is called when an appointment is due. 
 
-#### onErrorFunction
+``` onErrorFunction
 
 If a failure occurs during the execution of the trigger function, it will return an error. That error will be passed to the onError function.
 
