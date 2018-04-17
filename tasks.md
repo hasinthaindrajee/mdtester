@@ -119,10 +119,10 @@ function stopTask() returns error? {
 
 In this sample
 
-A task is registered with a delay of 1000 milliseconds and with an intervals of 1000 milliseconds.
-Function ```onTrigger ``` is triggered when the clock goes off.
-```onError``` function will be executed if an error is returned from the ```onTrigger``` function.
-In this sample the count will be incremented by the periodic task and if the count is equal to 10, an error occurs. If the count is equal to 20 the task will be stopped.
+* A task is registered with a delay of 1000 milliseconds and with an intervals of 1000 milliseconds.
+* Function ```onTrigger ``` is triggered when the clock goes off.
+* ```onError``` function will be executed if an error is returned from the ```onTrigger``` function.
+* In this sample the count will be incremented by the periodic task and if the count is equal to 10, an error occurs. If the count is equal to 20 the task will be stopped.
 
 
 
@@ -182,9 +182,9 @@ function cancelAppointment() {
 
 In this sample
 
-An appointment is registered with cron expression to run after each 5 seconds.
- Function ```onTrigger ``` is triggered in periods of 5 seconds..
-```onError``` function will be executed if an error is returned from the ```onTrigger``` function.
-In this sample the count will be incremented by the periodic task and if the count is equal to 10, an error occurs. If the count is equal to 20 the task will be stopped.
+* An appointment is registered with cron expression to run after each 5 seconds.
+* Function ```onTrigger ``` is triggered in periods of 5 seconds..
+* ```onError``` function will be executed if an error is returned from the ```onTrigger``` function.
+& In this sample the count will be incremented by the periodic task and if the count is equal to 10, an error occurs. If the count is equal to 20 the task will be stopped.
 
 
