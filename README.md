@@ -4,7 +4,7 @@ This package provides a basic API to manage logs in packages and files.
 
 ### Loggers 
 
-Loggers are defined over packages and there are dedicated loggers for each package. Packages that have loggers defined over it prints the logs that include the date, time, log level, package name, and more.  For example, given below is a log printed for the `[foo]` package.
+Loggers are defined over packages and there are dedicated loggers for each package. Packages that have loggers defined over it prints the logs that include the date, time, log level, package name, and more.  For example, given below is a log printed for the `foo` package.
 
 ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
 
@@ -50,18 +50,23 @@ Follow the steps given below to run the sample and get sample log outputs.
 
      `ballerina run foo/ 2> test.log`
 
-4. Control the log level output in the `foo` package:
 
-* To enable the ERROR debug logs using a CLI argument, run the command given below:
+4. Controlling the log level of the `foo` package:
 
-     `ballerina run foo/ -e foo.log.level=ERROR`
+* The log level for the `foo` package can be changed to ERROR as follows using CLI arguments.
 
-* To enable the debug logs using a configuration file, create a file named `ballerina.conf` in the same directory where the `test.bal` file was saved, copy the code given below, and save it.
+     `ballerina run foo/ -e foo.loglevel=ERRORR`
 
-   ```ballerina
-   [foo]
-   level="ERROR"
-   ```
+
+* To set the log level of `foo` pacakge using a configuration file, create a file named `ballerina.conf` in the source root of `test.bal`, and place the following entry..
+
+     ```ballerina
+      [foo]
+      loglevel="ERROR"
+     ```
    Next, run the `test.bal` file to print the ERROR logs.
-     `ballerina run foo/`
+    `ballerina run foo/`
+
+
+
 
