@@ -54,17 +54,16 @@ Follow the steps given below to run the sample and get sample log outputs.
 
 4. Control the log level output in the `foo` package:
 
-⋅⋅* To enable the ERROR debug logs using a CLI argument, run the command given below:
+* To enable the ERROR debug logs using a CLI argument, run the command given below:
 
-``` ballerina run foo/ -e foo.log.level=ERROR ```
+` ballerina run foo/ -e foo.log.level=ERROR `
 
-
-⋅⋅* To enable the debug logs using a configuration file, create a file named `ballerina.conf` in the same directory where the `test.bal` file was saved, copy the code given below, and save it.
+* To enable the debug logs using a configuration file, create a file named `ballerina.conf` in the same directory where the `test.bal` file was saved, copy the code given below, and save it.
 
 ```ballerina
 [foo]
 level="ERROR"
 ```
 Next, run the `test.bal` file to print the ERROR logs.
-` ballerina run foo/`
+`ballerina run foo/`
 
