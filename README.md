@@ -58,10 +58,10 @@ Follow the steps given below to run the sample and get sample log outputs.
 
 * To enable the debug logs using a configuration file, create a file named `ballerina.conf` in the same directory where the `test.bal` file was saved, copy the code given below, and save it.
 
-```ballerina
-[foo]
-level="ERROR"
-```
+   ```ballerina
+   [foo]
+   level="ERROR"
+   ```
    Next, run the `test.bal` file to print the ERROR logs.
      `ballerina run foo/`
 
