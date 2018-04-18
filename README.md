@@ -1,60 +1,32 @@
+## Package Overview
 
-This provides a basic API for logging which helps to support maintaining,  tracing, diagnosing and servicing software for service engineers, system administrators and developers. 
-
-Below are the key terms and functionalities exposed from this package.
+This package provides a basic API to manage logs in packages and files. 
 
 ### Loggers 
 
-Loggers are defined over packages. Ie there are dedicated loggers for each package and package will be printed with logs so that it is self contained with rest of the information.  In the below sample **[foo]** is the package where the ballerina logging logic (test.bal) resides.
+Loggers are defined over packages and there are dedicated loggers for each package. Packages that have loggers defined over it prints the logs that include the date, time, log level, package name, and more.  For example, given below is a log printed for the `[foo]` package.
 
-Ex - ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
-
+```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
 
 ### Log Outputs 
 
-All logs are written to **stderr** by default which is more container environment friendly than writing the logs to a file. Depending on requirements logs can be redirected to a log file using output redirection. Furthermore, different logging output levels can be defined for different packages. Refer **Log Level** section for more information about controlling log output levels.
+In Ballerina, all the logs are written to the `stderr` stream by default. Therefore, the logs are printed in the console. This makes it easy to debug the code in a container environment.
 
-Ex - Suppose you have a logging sample as described in [Ballerina by Example: Log API](https://ballerinalang.org/docs/by-example/log-api). If the given sample is run with below command the logs will be printed in the console . (test.bal contains   the Ballerina code for logging).
+Log outputs can be printed to a log file using a CLI argument or using configurations.
 
-```ballerina run test.bal```
-
-Instead you can redirect stderr stream to a log file using below command. 
-
-```ballerina run test.bal 2> test.log```
-
+Different output logging levels can be defined for packages. For more information, see the **Log Level** section.
 
 ### Log Level
 
- This includes a set of standard levels of logs which are used commonly such as **INFO, DEBUG, TRACE, WARN, ERROR**. By default the level of logging in Ballerina programs is **“INFO”**. In addition to these log levels, there are two additionals levels: OFF and ALL. OFF turns off logging and ALL allows all log levels. 
+This package provides functions to log at the `DEBUG`, `ERROR`, `INFO`, `TRACE`, `WARN`, `OFF`, and `ALL` levels. By default, all log messages are logged to the console at the `INFO` level. The `OFF` log level turns off logging and the `ALL` log level allows all log levels.
+
+## Sample  
+
+Follow the steps given below to run the sample and get sample log outputs.
+
+1. Create a directory named `foo`, add the code given below to a  file, and name the file `test.bal`.
 
 
-#### * Control log level from CLI
-
-Output log levels can be controlled over CLI arguments as well as through configurations. To control output log level over CLI use the below command.
-
-```ballerina run test.bal -e ballerina.log.level=<LOG_LEVEL>```
-
-Ex - ```ballerina run test.bal -e ballerina.log.level=ERROR -e foo.log.level=ERROR```
-
-ballerina.log.level=ERROR defines the overall logging level whereas foo.log.level=ERROR controls the logging level of package foo
-
-#### * Controlling log level from configuration file. 
-
-Create a file ballerina.conf at source root level if you do not have this config file already created. Add the following content and save it.
-```
-	[ballerina.log]
-	level="ERROR"
-
-	[foo]
-	level="ERROR"
-```
-
-### Sample : 
-
-In this sample term <project_home> will be referred to the root directory where the ballerina project resides.
-
-Create a directory with name foo.
-Add a file named test.bal and add the following content to the file.
 ```ballerina
 	package foo;
 	import ballerina/log;
@@ -69,18 +41,30 @@ Add a file named test.bal and add the following content to the file.
     	  log:printWarn("warn log");		
 	}
 ```
-  Save it.
 
-Stay in <project_home> directory and run the ballerina file.
-  ```ballerina run foo/ ```
+2. Navigate to the directory where the `test.bal` file is saved via the terminal and run the file using the command given below.
 
-To write logs to test.log file execute the below command.
+``` ballerina run foo/ ```
+
+
+3. By default, the logs are printed to the console. To write logs to the `test.log` file, execute the following command.
 
 ```ballerina run foo/ 2> test.log```
 
-To enable only debug logs, run the ballerina program with below arguments.
 
-```ballerina run foo/ -e ballerina.log.level=ERROR -e foo.log.level=ERROR ```
+4. Control the log level output in the `foo` package:
 
-		
-[1] https://ballerinalang.org/docs/by-example/log-api
+⋅⋅* To enable the ERROR debug logs using a CLI argument, run the command given below:
+
+``` ballerina run foo/ -e foo.log.level=ERROR ```
+
+
+⋅⋅* To enable the debug logs using a configuration file, create a file named `ballerina.conf` in the same directory where the `test.bal` file was saved, copy the code given below, and save it.
+
+```ballerina
+[foo]
+level="ERROR"
+```
+Next, run the `test.bal` file to print the ERROR logs.
+` ballerina run foo/`
+
