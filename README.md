@@ -62,6 +62,6 @@ Follow the steps given below to run the sample and get sample log outputs.
 [foo]
 level="ERROR"
 ```
-     Next, run the `test.bal` file to print the ERROR logs.
-`ballerina run foo/`
+   Next, run the `test.bal` file to print the ERROR logs.
+     `ballerina run foo/`
 
