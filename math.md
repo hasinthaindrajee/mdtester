@@ -8,7 +8,7 @@ Follow the steps given below to run the sample:
 
 Copy the code given below and save it to a file named `math.bal`.
 
-ballerina```
+```ballerina
 import ballerina/io;
 import ballerina/math;
 function main(string[] args) {
@@ -45,7 +45,7 @@ function main(string[] args) {
 ```
 Navigate to the directory where the `math.bal` file is saved via the terminal and run the file using the command given below.
 
-```ballerina run math.bal```
+`ballerina run math.bal`
 
 The following output is given for each function that was used in the `math.bal` file.
 
