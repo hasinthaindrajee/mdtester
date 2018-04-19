@@ -44,17 +44,17 @@ function main(string[] args) {
 ```
 2. Navigate to the directory where the `math.bal` file is saved via the terminal and run the file using the command given below.
 
-```Ballerina run math.bal```
+  ```Ballerina run math.bal```
 
-The following output is given for each function that was used in the `math.bal` file.
+  The following output is given for each function that was used in the `math.bal` file.
 
 ```ballerina
-Value of Pi : 3.141592653589793
-Value of E  : 2.718281828459045
-Absolute value of -152.2544 : 152.2544
-Absolute value of -152      : 152
-Arc cosine of 0.027415567780803774  : 1.5433773235341761
-Arc sine of 0.027415567780803774    : 0.02741900326072046
-Arc tangent of 0.027415567780803774 : 0.0274087022410345
-Cube root of 0.027415567780803774   : -3.0
+  Value of Pi : 3.141592653589793
+  Value of E  : 2.718281828459045
+  Absolute value of -152.2544 : 152.2544
+  Absolute value of -152      : 152
+  Arc cosine of 0.027415567780803774  : 1.5433773235341761
+  Arc sine of 0.027415567780803774    : 0.02741900326072046
+  Arc tangent of 0.027415567780803774 : 0.0274087022410345
+  Cube root of 0.027415567780803774   : -3.0
 ```
