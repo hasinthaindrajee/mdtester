@@ -1,17 +1,15 @@
 ## Package overview
 
-This package provides functions to perform fixed-precision integer arithmetic and fixed-precision decimal arithmetic. It includes functions to get the absolute, cosine, sine, root, tangent of a given value, and etc.
+This package provides functions to perform fixed-precision integer arithmetic and fixed-precision decimal arithmetic. It includes functions to get the absolute, cosine, sine, root, tangent, and more for a given value.
 
 ## Sample
 The sample given below uses a few functions that are in the `ballerina/math` package.
 Follow the steps given below to run the sample:
 
-Copy the code given below and save it to a file named `math.bal`.
-
+1. Copy the code given below to file and save it as `math.bal`.
 ```ballerina
 import ballerina/io;
 import ballerina/math;
-
 function main(string[] args) {
 
    // Get the value of Pi from the ‘ballerina/math package’.
@@ -44,9 +42,9 @@ function main(string[] args) {
    io:println("Cube root of -27   : " + cubeRoot);
 }
 ```
-Navigate to the directory where the `math.bal` file is saved via the terminal and run the file using the command given below.
+2. Navigate to the directory where the `math.bal` file is saved via the terminal and run the file using the command given below.
 
-`ballerina run math.bal`
+```Ballerina run math.bal```
 
 The following output is given for each function that was used in the `math.bal` file.
 
