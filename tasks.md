@@ -1,68 +1,44 @@
-## Overview
+## Package overview
 
-This package comprises of time tasks timers and task appointments.
+This package includes functions to manage task timers and task appointments.
 
+### Task timers
 
-### Tasks timers
+Timers execute periodic tasks. The initial execution of a task happens after a specific time period from the task registration, which is denoted using `delay`.  The frequency at which the tasks needs to be executed is defined using the `interval`. The `delay` and `interval` times are defined in milliseconds.
 
-Timers are used to execute periodical tasks. The timer starts ticking upon task registration. A timer may have an initial delay and an interval specified. The tasks will be triggered periodically following the given interval. The delay specifies the time between registering the task and its first execution. Thereafter, the timer will go off at regular intervals which causes the trigger function to be triggered. If a failure occurs during the execution of the trigger function, it will return an error. That error will be passed to the ```onErrorFunction ```.
+The tasks that need to be executed is defined in the `onTriggerFunction` function.  If an error is returned when executing the `onTriggerFunction` function, the `onErrorFunction` is executed.
 
-```onTriggerFunction ```
+The example given below defines the `doTask` function as the  `onTriggerFunction` function. It is executed a second after the task registers and runs every 0.5 seconds. If the function returns an error, the  `onError` function is executed. This function is responsible for handling errors that takes place while doing the specified task.
 
-The function which will be called upon timer goes off. 
-
-```onErrorFunction ```
- 
-This function will be called if an error occurred while executing onTriggerFunction. 
-
-```interval ```
-
-The time interval which the clock should go down. Once the peoriod of time denoted by ```intevel``` passes, the timer goes off and ```ballerina onTriggerFunction ``` is executed. The value should be specified in milliseconds.
-
-```delay```
-
-The delay which needs to be added executing the task upon for the very first time. This is specified in milliseconds.
-
-#### Define a task timer
 ```ballerina
 
-(function() returns error?) onTriggerFunction = doTask;
+    (function() returns error?) onTriggerFunction = doTask;
     (function(error)) onErrorFunction = onError;
-    timer = new task:Timer(onTriggerFunction, onErrorFunction, interval, delay = delay);
+    timer = new task:Timer(onTriggerFunction, onErrorFunction, 500, delay = 1000);
     _ = timer.start();
 
 ```
-Function doTask will do the timer task whereas function onError is the function which is responsible for handling errors which takes place while doing the specified task. 
-
 
 ### Task appointments
 
-An arrangement of a task to be taken place on clock time. If we take a real world appointment as an  analogy for an appointment task, an appointment takes place on a given time, in a given pattern. (may be periodically). Cron syntax is used to define the time, and in
-case of recurring appointments, the frequency of the appointment.
+A task appointment is similar to a real-world appointment. The task appointment is configured to run at a given time pattern. A cron expression is used to define the time, and the frequency a task appointment needs to run. 
 
-``` onTriggerFunction
+The `onTriggerFunction` function of the task is called when the appointment is due.  If an error is returned when executing the `onTriggerFunction` function, the `onErrorFunction` is called.
 
- A trigger function is called when an appointment is due. 
-
-``` onErrorFunction
-
-If a failure occurs during the execution of the trigger function, it will return an error. That error will be passed to the onError function.
-
-#### Define a task appointment
+The example given below triggers the `onTrigger` function every 5 seconds. If an error is returned, the `cleanupError` function is called.
 
 ```ballerina
- (function() returns error?) onTriggerFunction = onTrigger;
+    (function() returns error?) onTriggerFunction = onTrigger;
     (function (error)) onErrorFunction = cleanupError;
-    app = new task:Appointment(onTriggerFunction, onErrorFunction, cronExpression);
+    app = new task:Appointment(onTriggerFunction, onErrorFunction, "0/05 * * * * ?");
     _ = app.schedule();
 ```
 
-Funcion onTrigger is a user defined function which does the actual appointment task where as the function cleanupError acts as the function for handling if an error is returned from the task.
+## Samples
 
+### Tasks timer
 
-###Samples
-
-#### Tasks timer
+In this sample, a task is registered with a delay of 1000 milliseconds and is made to run every 1000 milliseconds. The `onTrigger ` function is triggered when the clock goes off. The `onError` function is executed if an error is returned from the `onTrigger` function. Further, the count variable is incremented by the task and if the count is equal to 10, an error is returned. If the count is equal to 20, the task is stopped using the `stopTask()` function.
 
 ```ballerina
 import ballerina/task;
@@ -72,32 +48,36 @@ import ballerina/runtime;
 int count;
 task:Timer? timer;
 
-function main (string[] args) {
-        io:println("tasks sample is running");
-        scheduleTimer(1000,1000);
-runtime:sleepCurrentWorker(100*1000);
+function main(string... args) {
+    io:println("tasks sample is running");
+    scheduleTimer(1000,1000);
+    // Keep the program running for 100*1000 milliseconds.
+	   runtime:sleepCurrentWorker(100*1000);
 }
 
 function scheduleTimer(int delay, int interval) {
+    // Point to the trigger function.
     (function() returns error?) onTriggerFunction = onTrigger;
+    // Point to the error function.
     (function (error)) onErrorFunction = onError;
+    // Register a task with given ‘onTrigger’ and ‘onError’ functions, and with given ‘delay’ and ‘interval’ times. 
     timer = new task:Timer(onTriggerFunction, onErrorFunction, interval, delay = delay);
+    // Start the timer.
     _ = timer.start();
 }
 
-function getCount() returns (int) {
-    return count;
-}
-
+// Define the ‘onError’ function for the task timer.
 function onError(error e) {
     io:print("[ERROR] failed to execute timed task");
     io:println(e);
 }
 
+// Define the ‘onTrigger’ function for the task timer.
 function onTrigger() returns error? {
     count = count + 1;
     if(count == 10) {
         error e = {message:"Task cannot be performed when the count is 10"};
+	   //The ‘onError’ function is called when the error is returned.
         return e;
     }
 
@@ -108,6 +88,7 @@ function onTrigger() returns error? {
     return ();
 }
 
+// Define the function to stop the task.
 function stopTask() returns error? {
     io:println("Stopping task");
     _ = timer.stop();
@@ -117,16 +98,11 @@ function stopTask() returns error? {
 
 ```
 
-In this sample
 
-* A task is registered with a delay of 1000 milliseconds and with an intervals of 1000 milliseconds.
-* Function ```onTrigger ``` is triggered when the clock goes off.
-* ```onError``` function will be executed if an error is returned from the ```onTrigger``` function.
-* In this sample the count will be incremented by the periodic task and if the count is equal to 10, an error occurs. If the count is equal to 20 the task will be stopped.
+### Tasks appointment
 
+In this sample, a task appointment is registered with a cron expression to run every 5 seconds. Therefore, the `onTrigger ` function is triggered every 5 seconds. The `onError` function is executed if an error is returned from the `onTrigger` function. Further, the count variable is incremented by the task and if the count is equal to 10, an error is returned. If the count is equal to 20, the task is stopped.
 
-
-#### Tasks appointment
 
 ```ballerina
 import ballerina/task;
@@ -136,20 +112,21 @@ import ballerina/runtime;
 int count;
 task:Appointment? app;
 
-function main (string[] args) {
-        io:println("tasks sample is running");
-        scheduleAppointment("0/05 * * * * ?");
-        runtime:sleepCurrentWorker(100*1000);
+function main(string... args) {
+    io:println("tasks sample is running");
+    // To schedule the appointment with given cron expression.
+    scheduleAppointment("0/05 * * * * ?");
+    // Keep the program running for 100*1000 seconds
+    runtime:sleepCurrentWorker(100*1000);
 }
 function scheduleAppointment(string cronExpression) {
+    // Define on trigger function
     (function() returns error?) onTriggerFunction = onTrigger;
+    // Define on error function
     (function (error)) onErrorFunction = onError;
+    // Schedule appointment.
     app = new task:Appointment(onTriggerFunction, onErrorFunction, cronExpression);
     _ = app.schedule();
-}
-
-function getCount() returns (int) {
-    return count;
 }
 
 function onTrigger() returns error? {
@@ -158,6 +135,7 @@ function onTrigger() returns error? {
 
     if(count == 10) {
         error e = {message:"Task appointment cannot be executed when the count is 10"};
+ // The ‘onError’ function is called when the error is returned.
         return e;
     }
 
@@ -168,23 +146,17 @@ function onTrigger() returns error? {
     return ();
 }
 
+// Define the ‘onError’ function for the task timer.
 function onError(error e) {
     io:print("[ERROR] failed to execute timed task");
     io:println(e);
 }
 
+// Define the function to stop the task.
 function cancelAppointment() {
     _ = app.cancel();
     count = -1;
 }
 
 ```
-
-In this sample
-
-* An appointment is registered with cron expression to run after each 5 seconds.
-* Function ```onTrigger ``` is triggered in periods of 5 seconds..
-* ```onError``` function will be executed if an error is returned from the ```onTrigger``` function.
-& In this sample the count will be incremented by the periodic task and if the count is equal to 10, an error occurs. If the count is equal to 20 the task will be stopped.
-
-
+## Package content
