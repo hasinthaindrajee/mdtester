@@ -52,7 +52,7 @@ function main(string... args) {
     io:println("tasks sample is running");
     scheduleTimer(1000,1000);
     // Keep the program running for 100*1000 milliseconds.
-	   runtime:sleepCurrentWorker(100*1000);
+    runtime:sleepCurrentWorker(100*1000);
 }
 
 function scheduleTimer(int delay, int interval) {
@@ -97,7 +97,6 @@ function stopTask() returns error? {
 }
 
 ```
-
 
 ### Tasks appointment
 
