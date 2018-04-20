@@ -134,7 +134,7 @@ function onTrigger() returns error? {
 
     if(count == 10) {
         error e = {message:"Task appointment cannot be executed when the count is 10"};
- // The ‘onError’ function is called when the error is returned.
+        // The ‘onError’ function is called when the error is returned.
         return e;
     }
 
