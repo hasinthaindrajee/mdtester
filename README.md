@@ -27,7 +27,7 @@ Below sequence diagram elaborates the flow of a request within Cellery mesh whil
 
 ### Inter Cell Communication
 
-<div style="text-align:center"><img src ="./resources/inter-cell.png" style= "width:40%" /></div>
+<div style="text-align:center"><img src ="./resources/inter-cell.png" style= "width:10%" /></div>
 
 Cells have trust relationship with each other. When a service in one cell invokes a service in another cell, issuer a cell’s STS issues a token addressing the destination cell passing user context obtained through the original edge token. Destination cell validates the token using issuer cells keys. In a case key is not cached, it will call the JWKS of the issuer cell and retrieve keys.  
 
