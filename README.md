@@ -1,10 +1,15 @@
-## Package Overview
+## 1.Mesh Security
 
-This package provides a basic API to manage logs in packages and files. 
+Within Cellery, each cell is considered as a unique trust domain. Each of these cells have it's own Secure Token Service (STS) which the workloads can use to communicate in a trusted manner with each other. Not only authentication, but also fine grained authorization requirements are also  can be achieved for inter and intra cell communications. 
 
-### Loggers 
+### 1.1 Journey of a request in terms of security.
 
-Loggers are defined over packages and there are dedicated loggers for each package. Packages that have loggers defined over it prints the logs that include the date, time, log level, package name, and more.  For example, given below is a log printed for the `foo` package.
+#### Edge Security 
+
+Cellery mesh has an entry point to the data plain which we call as the global gateway. Cell developers publish their global APIs to global gateway which ultimately are be exposed through global gateway. These APIs can be protected or unprotected. In a case if the APIs are protected, the end user will be retrieving an edge token to invoke the API through global gateway.
+
+This token will be an opaque token and end users uses this token to invoke APIs. Upon invoking APIs, global gateway issues a JWT token to the backend service, which is exposed through the cell gateway after validating the edge token. 
+
 
 ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
 
@@ -27,7 +32,7 @@ Follow the steps given below to run the sample and get sample log outputs.
 1. Create a directory named `foo`, add the code given below to a  file, and name the file `test.bal`.
 
 
-```ballerina
+```json
 	package foo;
 	import ballerina/log;
 
