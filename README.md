@@ -4,7 +4,7 @@ Within Cellery, each cell is considered as a unique trust domain. Each of these 
 
 ### 1.1 Journey of a request in terms of security.
 
-### Edge Security 
+### 1.1.1 Edge Security 
 
 Cellery mesh has an entry point to the data plain which we call as the global gateway. Cell developers publish their global APIs to global gateway which ultimately are be exposed through global gateway. These APIs can be protected or unprotected. In a case if the APIs are protected, the end user will be retrieving an edge token to invoke the API through global gateway.
 
@@ -13,20 +13,20 @@ This token will be an opaque token and end users uses this token to invoke APIs.
 <div align="center"><img src ="./resources/edge-security.png" width="70%"/></div>
 
 
-### Cell Security
+### 1.1.2 Cell Security
 
 From this point onwards the request will be flowing through cells and this is the first entry towards a cell. Each data plane component in Cellery has a sidecar attached to it. The requests which reaches components are intercepted by the STS through sidecars.
 
 <div align="center"><img src ="./resources/intracell.png" width="60%"/></div>
 
-### Token Request Flow
+### 1.1.3 oken Request Flow
 
 
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
 
 <div align="center"><img src ="./resources/token-flow.png" width="70%"/></div>
 
-### Inter Cell Communication
+### 1.1.4 Inter Cell Communication
 
 
 <div align="center"><img src ="./resources/inter-cell.png" width="70%"/></div>
@@ -104,11 +104,11 @@ The Cellery Team is pleased to welcome all contributors willing to join with us 
 
 To get started with building Cellery Mesh Security, the following are required.
 
-Docker
-Git
-JDK 1.8 or higher
-Maven
-GNU Make 4.1+
+* Docker
+* Git
+* JDK 1.8 or higher
+* Maven
+* GNU Make 4.1+
 		
 #### 3.1.2. Steps
 Clone mesh-security using below command.
