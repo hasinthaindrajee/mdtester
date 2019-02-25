@@ -12,25 +12,25 @@ This token will be an opaque token and end users uses this token to invoke APIs.
 
 <img src="./resources/edge-security.png" width="70%">
 
-Below is a diagram which will elaborate the flow of a request within Cellery mesh while interacting with two cells
 
 #### Cell Security
 
 From this point onwards the request will be flowing through cells and this is the first entry towards a cell. Each data plane component in Cellery has a sidecar attached to it. The requests which reaches components are intercepted by the STS through sidecars.
 
-![alt text](https://github.com/hasinthaindrajee/mdtester/blob/master/resources/intracell.png "Intra Cell Security")
+<img src="./resources/intracell.png" width="60%">
 
 ### Token Request Flow
 
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
 
-![alt text](https://github.com/hasinthaindrajee/mdtester/blob/master/resources/token-flow.png "Inter Cell Token Flow")
+<img src="./resources/token-flow.png" width="70%">
 
 ### Inter Cell Communication
 
-![alt text](https://github.com/hasinthaindrajee/mdtester/blob/master/resources/inter-cell.png "Inter Cell Token Flow")
+<img src="./resources/inter-cell.png" width="70%">
 
 Cells have trust relationship with each other. When a service in one cell invokes a service in another cell, issuer a cell’s STS issues a token addressing the destination cell passing user context obtained through the original edge token. Destination cell validates the token using issuer cells keys. In a case key is not cached, it will call the JWKS of the issuer cell and retrieve keys.  
+
 
 
 ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
