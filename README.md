@@ -42,8 +42,7 @@ Cells have trust relationship with each other. When a service in one cell invoke
 | enableIssuerValidation    | Enable / Disable issuer validation of tokens.         |
 | enableAudienceValidation  | Enable / Disable audience validation of tokens        |
 | enableAuthorization       | Enable / Disable authorization evaluations            |
-| OPAQueryPrefix            | OPA query prefix. Default one is data/cellery/io .    |
-                            |  (This is the package you are writing the policy).     |
+| OPAQueryPrefix            | OPA query prefix. Default one is data/cellery/io .(This is the package you are writing the policy).|    |
 
 
 ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
