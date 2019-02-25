@@ -88,6 +88,8 @@ kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
 
 The customer--products--categories-service denies the request since the source cell is not **"NonExistingCell"** . Reivews cell failed to retrieve response from this service since reivews cell is not allowed to talk to customer-products cell. 
 
+Format of the input json to OPA server can be found in [here}(./resources/input.json)
+
 ** Note : The rego poclicies should be written by replacing the "-" in your serivce name with "_" since - is a preseved 
 character in rego. Also the service name should be followed by a "_allow" in rego rule **
 
@@ -136,8 +138,9 @@ Cellery Mesh Security issue management is mainly handled through GitHub Issues. 
 We also welcome any external contributors who are willing to contribute. You can join a conversation in any existing issue and even send PRs to contribute. However, we suggest to start by joining into the conversations and learning about Cellery Mesh Security as the first step.
 
 Each issue we track has a variety of metadata which you can select with labels:
-Type: This represents the kind of the reported issues such as Bug, New Feature, Improvement, etc. 
-Priority: This represents the importance of the issue, and it can be scaled from High to Normal.
-Severity: This represents the impact of the issue in your current system. If the issue is blocking your system, and it’s having an catastrophic effect, then you can mark is ‘Blocker’. The ‘Blocker’ issues are given high priority as well when we are resolving the issues. 
 
-Additional to the information provided above, the issue template added to the repository will guide you to describe the issue in detail therefore we can analyze and work on the resolution towards it. Therefore we appreciate to fill the fields mostly as possible when you are creating the issue. We will evaluate issues, and based on the label provided details and labels, and will allocate to the Milestones.
+* Type: This represents the kind of the reported issues such as Bug, New Feature, Improvement, etc. 
+* Priority: This represents the importance of the issue, and it can be scaled from High to Normal.
+* Severity: This represents the impact of the issue in your current system. If the issue is blocking your system, and it’s having an catastrophic effect, then you can mark is ‘Blocker’. The ‘Blocker’ issues are given high priority as well when we are resolving the issues. 
+
+Additional to the information provided above, the issue template added to the repository will guide you to describe the issue in detail therefore we can analyze and work on the resolution towards it. We appreciate to fill the fields mostly as possible when you are creating the issue. We will evaluate issues, and based on the label provided details and labels, and will allocate to the Milestones.
