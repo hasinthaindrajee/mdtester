@@ -56,9 +56,9 @@ To start with you can deploy the review sample (Link here). When you invoke the 
 Edit the policy by editing the configmap customer-products-policy. 
 
 1) Open the policy configured for customer products cell. 
-
+```
 kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
-
+```
 2) Add the blow policy instead of default policy 
 
 ```
@@ -70,7 +70,7 @@ kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
    }
 ```
   		
-  This policy denies requests to customer-products--categories-service if the source cell name is not equal to “NonExistingCell”. After configuring this policy, wait for few seconds to get this deployed in OPA. (you can observe the logs of OPA container of customer-products-sts pod). Invoke the service. You will see the below part in you response 
+  This policy denies requests to customer-products--categories-service if the source cell name is not equal to **“NonExistingCell”**. After configuring this policy, wait for few seconds to get this deployed in OPA. (you can observe the logs of OPA container of customer-products-sts pod). Invoke the service. You will see the below part in you response 
 
 ```
 "category": {
@@ -79,7 +79,7 @@ kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
       },
 ```
 
-The customer--products--categories-service denies the request since the source cell is not "NonExistingCell" . Reivews cell failed to retrieve response from this service since reivews cell is not allowed to talk to customer-products cell. 
+The customer--products--categories-service denies the request since the source cell is not **"NonExistingCell"** . Reivews cell failed to retrieve response from this service since reivews cell is not allowed to talk to customer-products cell. 
 
 ## 2. Repo Structure
         
@@ -111,11 +111,14 @@ Maven
 GNU Make 4.1+
 		
 #### 3.1.2. Steps
-Clone mesh-security using below command
+Clone mesh-security using below command.
+```
 git clone https://github.com/cellery-io/mesh-security.git
+```
 Build the repo either using make file.
+```
 make build-all
-
+```
 ## 3.2. Issue Management
 
 Cellery Mesh Security issue management is mainly handled through GitHub Issues. Please feel free to open an issue about any question, bug report or feature request that you have in mind. (If you are unclear about where your issue should belong to, you can create it in Cellery SDK.)
