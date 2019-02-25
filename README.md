@@ -17,17 +17,17 @@ This token will be an opaque token and end users uses this token to invoke APIs.
 
 From this point onwards the request will be flowing through cells and this is the first entry towards a cell. Each data plane component in Cellery has a sidecar attached to it. The requests which reaches components are intercepted by the STS through sidecars.
 
-<img src="./resources/intracell.png" width="40%">
+<img src="./resources/intracell.png" width="50%">
 
 ### Token Request Flow
 
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
 
-<img src="./resources/token-flow.png" width="40%">
+<img src="./resources/token-flow.png" width="50%">
 
 ### Inter Cell Communication
 
-<img src="./resources/inter-cell.png" width="40%">
+<img src="./resources/inter-cell.png" width="50%">
 
 Cells have trust relationship with each other. When a service in one cell invokes a service in another cell, issuer a cell’s STS issues a token addressing the destination cell passing user context obtained through the original edge token. Destination cell validates the token using issuer cells keys. In a case key is not cached, it will call the JWKS of the issuer cell and retrieve keys.  
 
