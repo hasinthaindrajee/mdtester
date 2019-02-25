@@ -10,20 +10,20 @@ Cellery mesh has an entry point to the data plain which we call as the global ga
 
 This token will be an opaque token and end users uses this token to invoke APIs. Upon invoking APIs, global gateway issues a JWT token to the backend service, which is exposed through the cell gateway after validating the edge token. 
 
-<img src="./resources/edge-security.png" width="70%">
+<img src="./resources/edge-security.png" style = "width: 10%; margin-left: auto; margin-right: auto;">
 
 
 #### Cell Security
 
 From this point onwards the request will be flowing through cells and this is the first entry towards a cell. Each data plane component in Cellery has a sidecar attached to it. The requests which reaches components are intercepted by the STS through sidecars.
 
-<img src="./resources/intracell.png" width="60%">
+<img src="./resources/intracell.png" style = "width: 10%; margin-left: auto; margin-right: auto;">
 
 ### Token Request Flow
 
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
 
-<img src="./resources/token-flow.png" width="60%">
+<img src="./resources/token-flow.png" style = "width: 10%; margin-left: auto; margin-right: auto;">
 
 ### Inter Cell Communication
 
