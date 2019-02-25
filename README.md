@@ -88,12 +88,16 @@ kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
 
 The customer--products--categories-service denies the request since the source cell is not **"NonExistingCell"** . Reivews cell failed to retrieve response from this service since reivews cell is not allowed to talk to customer-products cell. 
 
-Format of the input json to OPA server can be found in [here}(./resources/input.json)
+Format of the input json to OPA server can be found in [here](./resources/input.json)
 
-** Note : The rego poclicies should be written by replacing the "-" in your serivce name with "_" since - is a preseved 
-character in rego. Also the service name should be followed by a "_allow" in rego rule **
+**Note : The rego poclicies should be written by replacing the "-" in your serivce name with "_" since - is a preseved 
+character in rego. Also the service name should be followed by a "_allow" in rego rule**
 
 ## 2. Repo Structure
+ 
+ Components comprise of cell and global components whereas docker directory contains docker files for building each 
+ components. Below is the source tree of mesh-security
+        
         
         ├── components
         │   ├── cell
