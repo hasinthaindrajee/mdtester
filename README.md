@@ -26,7 +26,7 @@ From this point onwards the request will be flowing through cells and this is th
 
 <div align="center"><img src ="./resources/intracell.png" width="60%"/></div>
 
-### 1.1.3 oken Request Flow
+### 1.1.3 Request Flow
 
 
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
@@ -77,7 +77,7 @@ kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
    }
 ```
   		
-  This policy denies requests to customer-products--categories-service if the source cell name is not equal to **“NonExistingCell”**. After configuring this policy, wait for few seconds to get this deployed in OPA. (you can observe the logs of OPA container of customer-products-sts pod). Invoke the service. You will see the below part in you response 
+  This policy denies requests to customer-products--categories-service if the source cell name is not equal to **“NonExistingCell”**. After configuring this policy, wait for few seconds to get this deployed in OPA. (you can observe the logs of OPA container of customer-products-sts pod). Invoke the service. In the response, below error can be observed as a part of the response.
 
 ```
 "category": {
@@ -87,6 +87,9 @@ kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
 ```
 
 The customer--products--categories-service denies the request since the source cell is not **"NonExistingCell"** . Reivews cell failed to retrieve response from this service since reivews cell is not allowed to talk to customer-products cell. 
+
+** Note : The rego poclicies should be written by replacing the "-" in your serivce name with "_" since - is a preseved 
+character in rego. Also the service name should be followed by a "_allow" in rego rule **
 
 ## 2. Repo Structure
         
