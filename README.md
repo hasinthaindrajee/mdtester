@@ -20,11 +20,13 @@ From this point onwards the request will be flowing through cells and this is th
 
 ![alt text](https://github.com/hasinthaindrajee/mdtester/blob/master/resources/intracell.png "Intra Cell Security")
 
+### Token Request Flow
+
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
 
 ![alt text](https://github.com/hasinthaindrajee/mdtester/blob/master/resources/token-flow.png "Inter Cell Token Flow")
 
-###Inter Cell Communication
+### Inter Cell Communication
 
 ![alt text](https://github.com/hasinthaindrajee/mdtester/blob/master/resources/inter-cell.png "Inter Cell Token Flow")
 
