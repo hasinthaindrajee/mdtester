@@ -1,5 +1,12 @@
 ## 1.Mesh Security
 
+
+  [![Build Status](https://wso2.org/jenkins/view/cellery/job/cellery/job/mesh-security/badge/icon)](https://wso2.org/jenkins/view/cellery/job/cellery/job/mesh-security/)
+  [![GitHub (pre-)release](https://img.shields.io/github/release/cellery-io/mesh-security/all.svg)](https://github.com/cellery-io/mesh-security/releases)
+  [![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/cellery-io/mesh-security.svg)](https://github.com/cellery-io/mesh-security/releases)
+  [![GitHub last commit](https://img.shields.io/github/last-commit/cellery-io/mesh-security.svg)](https://github.com/cellery-io/mesh-security/commits/master)
+  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+  
 Within Cellery, each cell is considered as a unique trust domain. Each of these cells have it's own Secure Token Service (STS) which the workloads can use to communicate in a trusted manner with each other. Not only authentication, but also fine grained authorization requirements are also  can be achieved for inter and intra cell communications. 
 
 ### 1.1 Journey of a request in terms of security.
