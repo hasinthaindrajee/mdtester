@@ -10,7 +10,7 @@ Cellery mesh has an entry point to the data plain which we call as the global ga
 
 This token will be an opaque token and end users uses this token to invoke APIs. Upon invoking APIs, global gateway issues a JWT token to the backend service, which is exposed through the cell gateway after validating the edge token. 
 
-<img src="./resources/edge-security.png" width="48">
+<img src="./resources/edge-security.png" width="70%">
 
 Below is a diagram which will elaborate the flow of a request within Cellery mesh while interacting with two cells
 
