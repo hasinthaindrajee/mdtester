@@ -4,7 +4,7 @@ Within Cellery, each cell is considered as a unique trust domain. Each of these 
 
 ### 1.1 Journey of a request in terms of security.
 
-#### Edge Security 
+### Edge Security 
 
 Cellery mesh has an entry point to the data plain which we call as the global gateway. Cell developers publish their global APIs to global gateway which ultimately are be exposed through global gateway. These APIs can be protected or unprotected. In a case if the APIs are protected, the end user will be retrieving an edge token to invoke the API through global gateway.
 
@@ -13,7 +13,7 @@ This token will be an opaque token and end users uses this token to invoke APIs.
 <div align="center"><img src ="./resources/edge-security.png" width="70%"/></div>
 
 
-#### Cell Security
+### Cell Security
 
 From this point onwards the request will be flowing through cells and this is the first entry towards a cell. Each data plane component in Cellery has a sidecar attached to it. The requests which reaches components are intercepted by the STS through sidecars.
 
@@ -21,16 +21,29 @@ From this point onwards the request will be flowing through cells and this is th
 
 ### Token Request Flow
 
+
 Below sequence diagram elaborates the flow of a request within Cellery mesh while interacting with two cells
 
 <div align="center"><img src ="./resources/token-flow.png" width="70%"/></div>
 
 ### Inter Cell Communication
 
+
 <div align="center"><img src ="./resources/inter-cell.png" width="70%"/></div>
 
 Cells have trust relationship with each other. When a service in one cell invokes a service in another cell, issuer a cell’s STS issues a token addressing the destination cell passing user context obtained through the original edge token. Destination cell validates the token using issuer cells keys. In a case key is not cached, it will call the JWKS of the issuer cell and retrieve keys.  
 
+### Configuring Cell STS.
+
+| Configuration Element     | Description                                           |
+| ------------------------- | ----------------------------------------------------- |
+| globalJWKS                | Global JWKS endpoint which is the APIM JWKS endpoint  |
+| enableSignatureValidation | Enable / Disable signature validation of tokens       |
+| enableIssuerValidation    | Enable / Disable issuer validation of tokens.         |
+| enableAudienceValidation  | Enable / Disable audience validation of tokens        |
+| enableAuthorization       | Enable / Disable authorization evaluations            |
+| OPAQueryPrefix            | OPA query prefix. Default one is data/cellery/io .    |
+                            |  (This is the package you are writing the policy).     |
 
 
 ```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
