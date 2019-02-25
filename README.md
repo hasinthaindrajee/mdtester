@@ -45,67 +45,86 @@ Cells have trust relationship with each other. When a service in one cell invoke
 | OPAQueryPrefix            | OPA query prefix. Default one is data/cellery/io .(This is the package you are writing the policy).|    |
 
 
-```2018-04-09 11:33:21,300 ERROR [foo] - This is an error log.```
+### Policy based access control.
 
-### Log Outputs 
+An Open Policy Agent (OPA) instance is running alongside with each STS. The default Cellery authorization mechanism is based on OPA quries. 
 
-In Ballerina, all the logs are written to the `stderr` stream by default. Therefore, the logs are printed in the console. This makes it easy to debug the code in a container environment.
+#### Sample
 
-Log outputs can be printed to a log file using a CLI argument or using configurations.
+To start with you can deploy the review sample (Link here). When you invoke the service, you will get the expected results as the response. 
 
-Different output logging levels can be defined for packages. For more information, see the **Log Level** section.
+Edit the policy by editing the configmap customer-products-policy. 
 
-### Log Level
+1) Open the policy configured for customer products cell. 
 
-This package provides functions to log at the `DEBUG`, `ERROR`, `INFO`, `TRACE`, `WARN`, `OFF`, and `ALL` levels. By default, all log messages are logged to the console at the `INFO` level. The `OFF` log level turns off logging and the `ALL` log level allows all log levels.
+kubectl edit configmaps kubectl edit configmaps customer-products--sts-policy
 
-## Sample  
+2) Add the blow policy instead of default policy 
 
-Follow the steps given below to run the sample and get sample log outputs.
+```
+ package cellery.io
+   customer_products__categories_service_allow = false
 
-1. Create a directory named `foo`, add the code given below to a  file, and name the file `test.bal`.
+   customer_products__categories_service_allow {	
+     input.source.cellName="NonExistingCell"
+   }
+```
+  		
+  This policy denies requests to customer-products--categories-service if the source cell name is not equal to “NonExistingCell”. After configuring this policy, wait for few seconds to get this deployed in OPA. (you can observe the logs of OPA container of customer-products-sts pod). Invoke the service. You will see the below part in you response 
 
-
-```json
-	package foo;
-	import ballerina/log;
-
-	function main(string[] args) {
-    	  error err = {message: "error occurred"};
-    	  log:printDebug("debug log");
-    	  log:printError("error log");
-    	  log:printErrorCause("error log with cause", err);
-    	  log:printInfo("info log");
-    	  log:printTrace("trace log");
-    	  log:printWarn("warn log");		
-	}
+```
+"category": {
+        "id": "3",
+        "error": "category service is currently unavailable"
+      },
 ```
 
-2. Navigate to the directory where the `test.bal` file is saved via the terminal and run the file using the command given below.
+The customer--products--categories-service denies the request since the source cell is not "NonExistingCell" . Reivews cell failed to retrieve response from this service since reivews cell is not allowed to talk to customer-products cell. 
 
-      `ballerina run foo/`
+## 2. Repo Structure
+        
+        ├── components
+        │   ├── cell
+        │   │   └── cell sts (Cell STS server)
+        │   ├── global
+        │   │   ├──extensions used in global APIM (JWT issuer to backed)
+        │   │   ├──token endpoint(Customized token endpoint for retrieving tokens for testing purposes)
+        │   │   └──token endpoint core (core logic of customized token endpoint in global plane)
+        │   └── orbit (gogoproto orbit which is used as a dependency to cell STS)
+        └── docker
+            └── sts docker (Docker file to build Cell STS image)
 
-3. By default, the logs are printed to the console. To write logs to the `test.log` file, execute the following command.
+## 3. Contribute to Cellery Mesh Security
 
-     `ballerina run foo/ 2> test.log`
+The Cellery Team is pleased to welcome all contributors willing to join with us in our journey.
 
+### 3.1. Build from Source
 
-4. Controlling the log level of the `foo` package:
+#### 3.1.1. Prerequisites 
 
-* The log level for the `foo` package can be changed to ERROR as follows using CLI arguments.
+To get started with building Cellery Mesh Security, the following are required.
 
-     `ballerina run foo/ -e foo.loglevel=ERRORR`
+Docker
+Git
+JDK 1.8 or higher
+Maven
+GNU Make 4.1+
+		
+#### 3.1.2. Steps
+Clone mesh-security using below command
+git clone https://github.com/cellery-io/mesh-security.git
+Build the repo either using make file.
+make build-all
 
+## 3.2. Issue Management
 
-* To set the log level of `foo` pacakge using a configuration file, create a file named `ballerina.conf` in the source root of `test.bal`, and place the following entry..
+Cellery Mesh Security issue management is mainly handled through GitHub Issues. Please feel free to open an issue about any question, bug report or feature request that you have in mind. (If you are unclear about where your issue should belong to, you can create it in Cellery SDK.)
 
-     ```ballerina
-      [foo]
-      loglevel="ERROR"
-     ```
-   Next, run the `test.bal` file to print the ERROR logs.
-    `ballerina run foo/`
+We also welcome any external contributors who are willing to contribute. You can join a conversation in any existing issue and even send PRs to contribute. However, we suggest to start by joining into the conversations and learning about Cellery Mesh Security as the first step.
 
+Each issue we track has a variety of metadata which you can select with labels:
+Type: This represents the kind of the reported issues such as Bug, New Feature, Improvement, etc. 
+Priority: This represents the importance of the issue, and it can be scaled from High to Normal.
+Severity: This represents the impact of the issue in your current system. If the issue is blocking your system, and it’s having an catastrophic effect, then you can mark is ‘Blocker’. The ‘Blocker’ issues are given high priority as well when we are resolving the issues. 
 
-
-
+Additional to the information provided above, the issue template added to the repository will guide you to describe the issue in detail therefore we can analyze and work on the resolution towards it. Therefore we appreciate to fill the fields mostly as possible when you are creating the issue. We will evaluate issues, and based on the label provided details and labels, and will allocate to the Milestones.
