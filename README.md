@@ -33,7 +33,7 @@ Below sequence diagram elaborates the flow of a request within Cellery mesh whil
 
 Cells have trust relationship with each other. When a service in one cell invokes a service in another cell, issuer a cell’s STS issues a token addressing the destination cell passing user context obtained through the original edge token. Destination cell validates the token using issuer cells keys. In a case key is not cached, it will call the JWKS of the issuer cell and retrieve keys.  
 
-### Configuring Cell STS.
+### 1.2 Configuring Cell STS.
 
 | Configuration Element     | Description                                           |
 | ------------------------- | ----------------------------------------------------- |
@@ -45,7 +45,7 @@ Cells have trust relationship with each other. When a service in one cell invoke
 | OPAQueryPrefix            | OPA query prefix. Default one is data/cellery/io .(This is the package you are writing the policy).|    |
 
 
-### Policy based access control.
+### 1.3 Policy based access control.
 
 An Open Policy Agent (OPA) instance is running alongside with each STS. The default Cellery authorization mechanism is based on OPA quries. 
 
